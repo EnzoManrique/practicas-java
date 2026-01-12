@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>ZonaFit Gym</title>
+    <h:outputStylesheet name="https://unpkg.com/primeflex@latest/primeflex.css"/>
+</h:head>
+<h:body>
+    <div class="card">
+        <h:form id="forma-clientes">
+            <p:growl id="mensajes" showDetails="true"/>
+            <div class="card">
+                <p:menubar>
+                    <p:menuitem value="inicio" icon="pi pi-fw-user"
+                    actionListener="#{indexControlador.cargarDatos}"/>
+                </p:menubar>
+            </div>
+        </h:form>
+    </div>
+    <h:form>
+        <p:panel header="Bienvenido a ZonaFit Gym">
+            <p:outputLabel value="Esta es la página de inicio de nuestra aplicación." />
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
