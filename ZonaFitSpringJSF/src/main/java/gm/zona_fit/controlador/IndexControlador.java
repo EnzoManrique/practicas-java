@@ -50,12 +50,30 @@ public class IndexControlador {
             this.clientes.add(this.clienteSeleccionado);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente agregado"));
         }
+
+        //Modificar
+        else{
+            this.clienteServicio.guardarCliente(this.clienteSeleccionado);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente guardado"));
+        }
+
         //Ocultar ventana modal
         PrimeFaces.current().executeScript("PF('ventanaModalCliente').hide()");
         //Actulizar tabla usando ajax
         PrimeFaces.current().ajax().update("forma-clientes:mensajes", "forma-clientes:clientes-tabla");
         //Reset de objeto selecionado
         this.clienteSeleccionado = null;
+    }
+
+    public void eliminarCliente() {
+        logger.info("Cliente a eliminar: " + this.clienteSeleccionado.toString());
+        this.clienteServicio.eliminarCliente(this.clienteSeleccionado);
+        //Eliminar registro de la lista de clientes
+        this.clientes.remove(this.clienteSeleccionado);
+        //Reset del objeto seleccionado
+        this.clienteSeleccionado=null;
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente eliminado"));
+        PrimeFaces.current().ajax().update("forma-clientes:mensajes", "forma-clientes:clientes-tabla");
     }
 
 }
