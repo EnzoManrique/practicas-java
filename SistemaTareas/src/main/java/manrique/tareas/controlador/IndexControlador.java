@@ -40,6 +40,13 @@ public class IndexControlador implements Initializable {
 
     private final ObservableList<Tarea> tareaList = FXCollections.observableArrayList();
 
+    @FXML
+    private TextField nombreTareaTexto;
+    @FXML
+    private TextField responsableTexto;
+    @FXML
+    private TextField estatusTexto;
+
 
 
     @Override
@@ -61,6 +68,41 @@ public class IndexControlador implements Initializable {
         tareaList.clear();
         tareaList.addAll(tareaServicio.listarTareas());
         tareaTabla.setItems(tareaList);
+    }
+
+    public void agregarTarea(){
+        if(nombreTareaTexto.getText().isEmpty()){
+            mostrarMensaje("Error validacion","Debe proporcionar una tarea");
+            nombreTareaTexto.requestFocus();
+            return;
+        }else{
+            var tarea = new Tarea();
+            recolectarDatosFormulario(tarea);
+            tareaServicio.guardarTarea(tarea);
+            mostrarMensaje("Informacion","Tarea guardada correctamente");
+            limpiarFormulario();
+            listarTareas();
+        }
+    }
+
+    private void mostrarMensaje(String titulo, String mensaje){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void recolectarDatosFormulario(Tarea tarea){
+        tarea.setNombreTarea(nombreTareaTexto.getText());
+        tarea.setResponsable(responsableTexto.getText());
+        tarea.setEstatus(estatusTexto.getText());
+    }
+
+    private void limpiarFormulario(){
+        nombreTareaTexto.clear();
+        responsableTexto.clear();
+        estatusTexto.clear();
     }
 
 }
