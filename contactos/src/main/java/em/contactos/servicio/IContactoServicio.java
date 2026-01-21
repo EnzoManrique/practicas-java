@@ -12,6 +12,6 @@ public interface IContactoServicio {
 
     public void guardarContacto(Contacto contacto);
 
-    public void eliminarContacto(Integer id);
+    public void eliminarContacto(Contacto contacto);
 
 }
